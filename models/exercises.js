@@ -4,7 +4,7 @@ var Schema = mongoose.Schema;
 
 var ExerciseSchema = new Schema({
     type: {
-        type: Option,
+        type: String,
         required: true
     },
     name: {

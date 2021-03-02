@@ -22,9 +22,22 @@ app.use(express.json());
 app.use(express.static("public"));
 
 // Connect to the Mongo DB
-mongoose.connect("mongodb://localhost/workoutdb", { useNewUrlParser: true });
+mongoose.connect("mongodb://localhost/workout", { useNewUrlParser: true });
 
 app.listen(PORT, () => {
     console.log(`App running on port ${PORT}!`);
   });
+
+
+
+app.get("/api/workouts", (req, res) => {
+  db.Workout.find({})
+    .then(dbWorkout => {
+      console.log(dbWorkout);
+      res.json(dbWorkout);
+    })
+    .catch(err => {
+      res.json(err);
+    });
+});
   

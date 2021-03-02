@@ -10,7 +10,8 @@ var WorkoutSchema = new Schema({
 
   exercises: {
       type: Schema.Types.ObjectId,
-      ref: "Exercise"
+      ref: "Exercise",
+      required: true
   }
 });
 
