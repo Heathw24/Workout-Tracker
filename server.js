@@ -5,6 +5,7 @@ var mongoose = require("mongoose");
 
 // Require all models
 var db = require("./models");
+const Exercises = require("./models/exercises");
 
 var PORT = process.env.PORT || 3000;
 
@@ -39,5 +40,18 @@ app.get("/api/workouts", (req, res) => {
     .catch(err => {
       res.json(err);
     });
+});
+
+app.post("/api/workouts", (req, res) => {
+  db.Workout.create(
+    {date: new Date().getDate()},
+    {exercises: [req.body]}
+  ).then(dbWorkout => {
+    res.json(dbWorkout);
+    console.log(dbWorkout + "post request server")
+  })
+  .catch(err => {
+    res.json(err);
+  });
 });
   

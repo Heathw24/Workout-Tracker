@@ -11,13 +11,23 @@ var ExerciseSchema = new Schema({
         type: String,
         required: true
     },
-    duration: Number,
-    weight: Number,
-    sets: Number,
-    reps: Number,
-    distance: Number
+    duration: {
+        type: Number
+    },
+    weight: {
+        type: Number
+    },
+    sets: {
+         Number
+    },
+    reps: {
+         Number
+    },
+    distance: {
+        Number
+    }
 });
 
-var Exercise = mongoose.model("Exercise", ExerciseSchema);
+var Exercises = mongoose.model("Exercises", ExerciseSchema);
 
-module.exports = Exercise;
+module.exports = Exercises;
