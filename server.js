@@ -3,17 +3,15 @@ var logger = require("morgan");
 var mongoose = require("mongoose");
 
 
-// Require all models
-var db = require("./models");
+// // Require all models
+// var db = require("./models");
 
 var PORT = process.env.PORT || 3000;
 
 // Initialize Express
 var app = express();
 
-// Requiring Routes
-require("./routes/api-routes.js")(app);
-// require("./routes/html-routes.js")(app);
+
 
 // Use morgan logger for logging requests
 app.use(logger("dev"));
@@ -24,7 +22,16 @@ app.use(express.json());
 app.use(express.static("public"));
 
 // Connect to the Mongo DB
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workout", { useNewUrlParser: true });
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workout", 
+    {
+       useNewUrlParser: true 
+    }
+  );
+
+
+// Requiring Routes
+app.use(require('./routes/api-routes.js'));
+app.use(require('./routes/html-routes.js'));
 
 app.listen(PORT, () => {
     console.log(`App running on port ${PORT}!`);

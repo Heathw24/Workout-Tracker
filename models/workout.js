@@ -1,11 +1,12 @@
 var mongoose = require("mongoose");
+const Exercises = require("./exercises");
 
 var Schema = mongoose.Schema;
 
 var WorkoutSchema = new Schema({
   day: {
       type: Date,
-      required: true
+      default: Date.now
   },
 
   exercises: [
@@ -19,23 +20,41 @@ var WorkoutSchema = new Schema({
           required: true
       },
       duration: {
-          type: Number
+          type: Number,
+          default: 0
       },
       weight: {
-          type: Number
+          type: Number,
+          default: 0
       },
       sets: {
-           Number
+           type: Number,
+           default: 0
       },
       reps: {
-           Number
+           type: Number,
+           default: 0
       },
       distance: {
-          Number
+          type: Number,
+          default: 0
       }
   }
-  ] 
+  ],
+  totalDuration: {
+    type: Number,
+    set: calcTotal
+}
 });
+
+function calcTotal(totalDuration){
+    var totalDuration = 0;
+    for (i = 0; i < this.exercises.length; i++){
+      totalDuration = totalDuration + this.exercises[i].duration;
+    };
+    return totalDuration;
+};
+
 
 var Workout = mongoose.model("Workout", WorkoutSchema);
 
